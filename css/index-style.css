@@ -1,0 +1,46 @@
+#grid{
+    position: relative;
+	background-color: #121212;
+	width: 500px;
+    height: auto; 
+    min-height: 400px;
+    margin: 0 auto;
+    margin-top: 10px;
+	padding: 30px;
+	overflow: auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center; 
+    align-items: center;
+}
+
+#grid button{
+    background-color: #121212;
+    color: #08bcc2;
+    border: 3px solid #08bcc2;
+    border-radius: 5px;
+    font-weight: bold;
+    margin: 5px;
+    width: 60px;
+    height: 60px;
+}
+
+#grid button:hover{
+    background-color: #08bcc2;
+    color: #121212;
+}
+
+#inputs, #results{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center; 
+    align-items: center;
+    color: #08bcc2;
+    font-size: 1.7em;
+}
+
+#inputs{
+    margin-top: 100px;
+}
