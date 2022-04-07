@@ -1,18 +1,28 @@
-function array2DToHTML(array) {
+// This function is used to convert a 2D array to a grid of buttons that will be displayed
+// in a HTML tag identified by the 'tagID' input.
+// Constraint: All array elements within the outer array must have the same length. 
+// array[0].length == array[1].length == array[2].length
+function array2DToHTML(array, tagId) {
     var t = "";
+
+    // Loop over each array element in outer array
     for (var i = 0; i < array.length; i++){
+        // Create div to represent the current row
         var cells = "<div id='row-" + (i+1) + "'>";
 
+        // Loop over each value in array element
         for (var j = 0; j < array[0].length; j++){
+            // Create button tag with value as button text
             cells += "<button id='cell-"+ i +"-" + j + "'>" + array[i][j] + "</button>";
         }
 
         cells += "</div>";
         t += cells;
     }
-    document.getElementById("grid").innerHTML = t;
+    document.getElementById(tagId).innerHTML = t;
 
-    bclicks = document.querySelectorAll("#grid button");
+    // When each button in the grid is clicked, the function, buildString() is called 
+    bclicks = document.querySelectorAll("#" + tagId + " button");
     for (let bclick of bclicks) {
         bclick.addEventListener("click", () => {
             var v = bclick.textContent;
@@ -63,8 +73,9 @@ var twoDArray = [
     ['/', '1', '2', '3'],
     ['-', '.', '0', '='],
 ];
+array2DToHTML(twoDArray, "grid")
+
 var fullNumber = ''
 var inputNumbers = []
 var inputOperations = []
 
-array2DToHTML(twoDArray)
