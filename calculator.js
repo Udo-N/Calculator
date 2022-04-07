@@ -32,37 +32,48 @@ function array2DToHTML(array, tagId) {
 
 }
 
+// This function is used to display text when the calculator's buttons are pushed and display 
+// a result when the '=' button is pushed
 function buildString(buttonText){
-    if (!isNaN(buttonText) || buttonText == '.'){    // If ButtonText is a number
+    // If the button pressed is a number or '.', display that value above the button grid and
+    // append the number to a string called 'fullNumber'
+    if (!isNaN(buttonText) || buttonText == '.'){    
         fullNumber += buttonText
         document.getElementById("inputs").innerHTML += buttonText
         document.getElementById("results").innerHTML = 'Result = '
     }
+    // Append fullNumber to the array 'inputNumbers' and reset fullNumber to an empty string
     else{
         inputNumbers.push(fullNumber)
         fullNumber = ''
 
+        // If an operation button (+, *, -, /), place the operation after fullNumber in the 
+        // browser and add the operation to the array 'inputOperations'
         if (buttonText != '='){
             inputOperations.push(buttonText)
             document.getElementById("inputs").innerHTML += ' ' + buttonText + ' '
             document.getElementById("results").innerHTML = 'Result = '
         }
-        else{
-            console.log(inputNumbers)
-            executable = 'result = ' + inputNumbers[0]
 
+        // Else if '=' is pressed:
+        else{
+            // Append all the numbers and operations that are stored in inputNumbers and 
+            // inputOperations into a single string
+            executable = 'result = ' + inputNumbers[0]
             for(var i=0; i < inputOperations.length; i++){
                 executable += inputOperations[i] + inputNumbers[i+1]
             }
 
+            // Execute the single string as a line of code and clear both arrays
             eval(executable)
             inputNumbers = []
             inputOperations = []
+
+            // Format non-whole numbers to 4 decimal places
             if(!Number.isInteger(result)){result = result.toFixed(4)}
 
             document.getElementById("inputs").innerHTML = ''
             document.getElementById("results").innerHTML += result;
-            console.log(result)
         }
     }
 }
