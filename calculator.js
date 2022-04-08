@@ -64,19 +64,29 @@ function buildString(buttonText){
                 executable += inputOperations[i] + inputNumbers[i+1]
             }
 
-            // Execute the single string as a line of code and clear both arrays
-            eval(executable)
-            inputNumbers = []
-            inputOperations = []
+            try{
+                // Execute the single string as a line of code and clear both arrays
+                eval(executable)
+                inputNumbers = []
+                inputOperations = []
 
-            // Format non-whole numbers to 4 decimal places
-            if(!Number.isInteger(result)){result = result.toFixed(4)}
+                // Format non-whole numbers to 4 decimal places
+                if(!Number.isInteger(result)){result = result.toFixed(4)}
 
-            document.getElementById("inputs").innerHTML = ''
-            document.getElementById("results").innerHTML += result;
+                document.getElementById("inputs").innerHTML = ''
+                document.getElementById("results").innerHTML += result;
+            }
+            // If input is invalid, display 'Syntax Error' 
+            catch (error){
+                document.getElementById("inputs").innerHTML = ''
+                document.getElementById("results").innerHTML = "Syntax Error";
+                inputNumbers = []
+                inputOperations = []
+            }
         }
     }
 }
+
 
 var twoDArray = [
     ['+', '7', '8', '9'],
